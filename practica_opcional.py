@@ -19,14 +19,19 @@ class Client(object):
     def search_text(self,html):
         soup = BeautifulSoup(html, 'html.parser')
         elements = soup.find_all("div", "dotd-title") # Buscar un div que tingui aquesta clase
-        
-        return elements
+        #title = elements.get_text("h2") # Per agafar el contingut del HTML
+        resultats = []
+        for element in elements:
+            data = element.find("h2")
+            title = data.text
+            title = title.strip() # Quitar espacios en blanco de los lados
+        return title
 
     def main(self):
         web = self.get_web('https://www.packtpub.com/packt/offers/free-learning/')
         resultat = self.search_text(web)
         # FIXME: Imprimir resultats
-        print len(resultat)
+        print resultat
 
 if __name__ == "__main__":
     client = Client()
