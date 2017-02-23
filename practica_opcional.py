@@ -20,13 +20,9 @@ class Client(object):
     def search_text(self,html):
         """ Buscar el text """
         soup = BeautifulSoup(html, 'html.parser')
-        elements = soup.find_all("div", "dotd-title") # Buscar un div que tingui aquesta clase
-        #title = elements.get_text("h2") # Per agafar el contingut del HTML
-        resultats = []
-        for element in elements:
-            data = element.find("h2")
-            title = data.text
-            title = title.strip() # Quitar espacios en blanco de los lados
+        elements = soup.find("div", "dotd-title") # Buscar un div que tingui aquesta clase
+        title = elements.text
+        title = title.strip() # Quitar espacios en blanco de los lados
         return title
 
     def notification(self,title):
